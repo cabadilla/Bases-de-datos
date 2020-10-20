@@ -1,0 +1,5 @@
+<Tipo_Moneda>
+<TipoMoneda Id="1" Nombre="Colones" Simbolo="₡"/>
+<TipoMoneda Id="2" Nombre="Dolares" Simbolo="$"/>
+<TipoMoneda Id="3" Nombre="Euros" Simbolo="€"/>
+</Tipo_Moneda>
