@@ -1,0 +1,22 @@
+CREATE PROCEDURE [DBO].[borrarUsuario]
+
+@Id int
+
+AS
+BEGIN 
+SET NOCOUNT ON 
+
+	BEGIN TRY
+
+	DELETE FROM [dbo].[Usuario]
+      WHERE Id=@Id
+
+	END TRY
+	BEGIN CATCH
+
+	END CATCH
+
+SET NOCOUNT OFF
+END
+
+
