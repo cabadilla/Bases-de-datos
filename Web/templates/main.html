@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="botonesRedi">
+
+    <h1>Cuenta Bancaria</h1>
+    <form action="/beneficiario">
+        <button class="btn btn-primary btn-block btn-large">Ir a beneficiarios</button>
+    </form>
+    
+    <form action="/estadosDeCuenta">
+        <button class="btn btn-primary btn-block btn-large">Ir a estados de cuenta</button>
+    </form>
+
+
+    <div> <form action="/informacionPersonal">
+        <button class="btn btn-primary btn-block btn-large">Ver informacion personal</button>
+    </form>
+</div>
+    
+
+
+{% endblock %}

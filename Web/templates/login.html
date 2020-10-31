@@ -1,9 +1,8 @@
 {% extends "layout.html" %}
 {% block body %}
-
 <div class="login">
 	<h1>Login</h1>
-    <form action="/nombres" method="post">
+    <form action="/entrar" method="post">
     	<input type="text" name="u" placeholder="Usuario" required="required" />
         <input type="password" name="p" placeholder="Contraseña" required="required" />
         <button type="submit" class="btn btn-primary btn-block btn-large">Iniciar sesion</button>
