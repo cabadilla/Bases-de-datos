@@ -1,15 +1,5 @@
 declare @doc xml
-set @doc='
-	<Parentezcos>
-		<Parentezco Id="1" Nombre="Padre"/>
-		<Parentezco Id="2" Nombre="Madre"/>
-		<Parentezco Id="3" Nombre="Hijo"/>
-		<Parentezco Id="4" Nombre="Hija"/>
-		<Parentezco Id="5" Nombre="Hermano"/>
-		<Parentezco Id="6" Nombre="Hermana"/>
-		<Parentezco Id="7" Nombre="amigo"/>
-		<Parentezco Id="8" Nombre="amiga"/>
-</Parentezcos>
+set @doc=(SELECT [XML] FROM DatosXml WHERE  Id= 4)
 		'
 insert into DBO.Parentezco(Id,Nombre)
 select 

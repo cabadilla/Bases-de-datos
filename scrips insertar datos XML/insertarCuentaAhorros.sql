@@ -1,13 +1,9 @@
+---Dependiendo del id equivale al xml que se necesita, usar la consulta a DatosXml para saber cual necesitamos
 declare @doc xml
-set @doc='
-	<Cuentas>
-<Cuenta ValorDocumentoIdentidadDelCliente="117370445"
-	TipoCuentaId="1"
-	NumeroCuenta="11000001"
-	FechaCreacion="2020-10-13"
-	Saldo="1000000.00"/>
-</Cuentas>
-		'
+set @doc=(SELECT [XML] FROM DatosXml WHERE  Id= 1)
+--select * from DatosXml
+
+
 insert into DBO.CuentaAhorros(NumeroCuenta,IdTipoCuentaAhorros,IdCliente,Saldo,FechaCreacion)
 select 
 	x.Rec.value('@NumeroCuenta[1]','int'),

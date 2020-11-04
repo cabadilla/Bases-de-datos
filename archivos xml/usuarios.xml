@@ -1,0 +1,7 @@
+<Usuarios>
+    <Usuario User="jaguero" Pass="LaFacil" ValorDocumentoIdentidad="117370445" EsAdministrador="0" />
+    <Usuario User="ralvarez" Pass="SiendoFeliz123" ValorDocumentoIdentidad="160713985" EsAdministrador="0" />
+    <Usuario User="imendez" Pass="DebajoDelMar5454" ValorDocumentoIdentidad="143062990" EsAdministrador="0" />
+    <Usuario User="gruiz" Pass="LaGloriaEsMia" ValorDocumentoIdentidad="134225981" EsAdministrador="0" />
+    <Usuario User="fquiros" Pass="MyPass123*" ValorDocumentoIdentidad="106030039" EsAdministrador="1" />
+  </Usuarios>

@@ -1,11 +1,7 @@
-
 declare @doc xml
-set @doc='
-	<Usuarios>
-	<Usuario User="jaguero" Pass="LaFacil" EsAdministrador="0" />
-	<Usuario User="fquiros" Pass="MyPass123*" EsAdministrador="1" />
-</Usuarios>
-		'
+set @doc=(SELECT [XML] FROM DatosXml WHERE  Id= 9)
+select * from DatosXml
+
 insert into DBO.Usuario(Usuario,Contrasena,EsAdministrador)
 select 
 	x.Rec.value('@User[1]','varchar(100)'),
