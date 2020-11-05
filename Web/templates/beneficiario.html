@@ -1,6 +1,25 @@
 {% extends "layout.html" %}
 {% block body %}
+<div class="bene">
 
-<h1>Estoy en beneficiario</h1>
+    <form action="/insertarBene">
+        <button class="btn btn-primary">Insertar</button>
+    </form>
+
+    <form action="/borrarBene">
+        <button class="btn btn-primary">Borrar</button>
+    </form>
+
+    <form action="/consultarBene">
+        <button class="btn btn-primary">Consultar Beneficiario</button>
+    </form>
+
+    <form action="/editarBene">
+        <button class="btn btn-primary">Editar Beneficiario</button>
+    </form>
+        
+    
+
+</div>
 
 {% endblock %}

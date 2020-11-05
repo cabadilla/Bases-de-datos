@@ -1,4 +1,4 @@
-from flask import Flask,render_template,url_for,request,redirect
+from flask import Flask,render_template,url_for,request,redirect,flash
 from flask_sqlalchemy import SQLAlchemy
 
 
@@ -26,6 +26,22 @@ def main():
 @app.route('/beneficiario')
 def beneficiario():
     return render_template('beneficiario.html')
+
+@app.route('/insertarBene')
+def insertarBene():
+    return redirect('/main')
+
+@app.route('/editarBene')
+def editarBene():
+    pass
+
+@app.route('/consultarBene')
+def consultarBene():
+    pass
+
+@app.route('/borrarBene')
+def borrarBene():
+    pass
 
 #ruta de los estados de cuenta
 @app.route('/estadosDeCuenta')
