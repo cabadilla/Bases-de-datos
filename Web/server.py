@@ -1,9 +1,13 @@
 from flask import Flask,render_template,url_for,request,redirect
 from flask_sqlalchemy import SQLAlchemy
+import pyodbc
 
 
 app = Flask(__name__)
 app.static_folder = 'static'
+
+
+
 
 #ruta de inicio donde se hace el login
 @app.route('/')
@@ -36,6 +40,5 @@ def estadosDeCuenta():
 @app.route('/informacionPersonal')
 def informacionPersonal():
     return render_template('informacionPersonal.html')
-
 
 app.run(port=3000, debug=True)
