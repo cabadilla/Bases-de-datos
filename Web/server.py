@@ -3,15 +3,15 @@ from flask_sqlalchemy import SQLAlchemy
 import pyodbc
 
 direccion_servidor = 'tcp:serverproyecto.database.windows.net,1433'
-nombre_bd = 'ProyectoBases1'
+nombre_bd = 'ProyectoBasesI'
 nombre_usuario = 'allisoncarlos'
 password ='ac-12345'
 try:
     conexion = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER=' +
                               direccion_servidor+';DATABASE='+nombre_bd+';UID='+nombre_usuario+';PWD=' + password)
-    # OK! conexión exitosa
+    #OK! conexión exitosa
 except Exception as e:
-    # Atrapar error
+    #Atrapar error
     print("Ocurrió un error al conectar a SQL Server: ", e)
 
 cursor=conexion.cursor()
