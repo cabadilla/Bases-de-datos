@@ -2,12 +2,25 @@ from flask import Flask,render_template,url_for,request,redirect,flash
 from flask_sqlalchemy import SQLAlchemy
 import pyodbc
 
+direccion_servidor = 'tcp:serverproyecto.database.windows.net,1433'
+nombre_bd = 'ProyectoBases1'
+nombre_usuario = 'allisoncarlos'
+password ='ac-12345'
+try:
+    conexion = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER=' +
+                              direccion_servidor+';DATABASE='+nombre_bd+';UID='+nombre_usuario+';PWD=' + password)
+    # OK! conexión exitosa
+except Exception as e:
+    # Atrapar error
+    print("Ocurrió un error al conectar a SQL Server: ", e)
+
+cursor=conexion.cursor()
+
 
 app = Flask(__name__)
 app.static_folder = 'static'
 
-
-
+app.secret_key='mysecretkey'
 
 #ruta de inicio donde se hace el login
 @app.route('/')
@@ -29,22 +42,24 @@ def main():
 #ruta de los beneficiarios
 @app.route('/beneficiario')
 def beneficiario():
-    return render_template('beneficiario.html')
+    data=["dfdf",'fdds','fds']
+    return render_template('beneficiario.html',datos=data)
 
 @app.route('/insertarBene')
 def insertarBene():
-    return redirect('/main')
+    flash("Insertado Correctamente")
+    return redirect(url_for('beneficiario'))
 
-@app.route('/editarBene')
-def editarBene():
+@app.route('/editarBene/<ide>')
+def editarBene(ide):
     pass
 
 @app.route('/consultarBene')
 def consultarBene():
     pass
 
-@app.route('/borrarBene')
-def borrarBene():
+@app.route('/borrarBene/<ide>')
+def borrarBene(ide):
     pass
 
 #ruta de los estados de cuenta

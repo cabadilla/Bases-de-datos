@@ -1,5 +1,15 @@
 {% extends "layout.html" %}
 {% block body %}
+
+{% with messages =get_flashed_messages()%}
+
+{%if messages%}
+{%for message in messages%}
+<p>{{message}}</p>
+{%endfor%}
+{%endif%}
+
+{%endwith%}
 <div class="bene">
 
     <form action="/insertarBene">
@@ -17,8 +27,32 @@
     <form action="/editarBene">
         <button class="btn btn-primary">Editar Beneficiario</button>
     </form>
-        
-    
+
+    <div class="tablaBene">
+        <table>
+            <thead>
+                <tr>
+                <td>Nombre</td>
+                <td>Identificacion</td>
+                <td>Porcentaje</td>
+                </tr>
+            </thead>
+            <tbody>
+                {%for bene in datos%}
+                    <tr>
+                        <td>{{bene}}</td>
+                        <td>{{bene}}</td>
+                        <td>{{bene}}</td>
+                        <td>
+                            <a href="/editarBene/{{bene}}" class="btn btn-primary">Editar</a>
+                            <a href="/borrarBene/{{bene}}" class="btn btn-primary">Borrar</a>
+                        </td>
+
+                    </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
 
 </div>
 
