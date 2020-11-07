@@ -3,12 +3,11 @@ from flask_sqlalchemy import SQLAlchemy
 import pyodbc
 
 direccion_servidor = 'tcp:serverproyecto.database.windows.net,1433'
-nombre_bd = 'ProyectoBases1'
+nombre_bd = 'ProyectoBasesI'
 nombre_usuario = 'allisoncarlos'
 password ='ac-12345'
 try:
-    conexion = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER=' +
-                              direccion_servidor+';DATABASE='+nombre_bd+';UID='+nombre_usuario+';PWD=' + password)
+    conexion = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + direccion_servidor+';DATABASE='+nombre_bd+';UID='+nombre_usuario+';PWD=' + password)
     # OK! conexión exitosa
 except Exception as e:
     # Atrapar error
@@ -42,7 +41,10 @@ def main():
 #ruta de los beneficiarios
 @app.route('/beneficiario')
 def beneficiario():
-    data=["dfdf",'fdds','fds']
+    #cursor.execute("exec verPersona 22")
+    #data=cursor.fetchall()
+    #print(data)
+    data=(('1','vsdvdvf','3'),('2','vsdvdvf','5'),('3','vsdvdvf','8'))
     return render_template('beneficiario.html',datos=data)
 
 @app.route('/insertarBene')
@@ -52,7 +54,8 @@ def insertarBene():
 
 @app.route('/editarBene/<ide>')
 def editarBene(ide):
-    pass
+    flash(ide)
+    return redirect(url_for('beneficiario'))
 
 @app.route('/consultarBene')
 def consultarBene():

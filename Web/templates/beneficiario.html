@@ -32,20 +32,20 @@
         <table>
             <thead>
                 <tr>
-                <td>Nombre</td>
                 <td>Identificacion</td>
+                <td>Parentezco</td>
                 <td>Porcentaje</td>
                 </tr>
             </thead>
             <tbody>
                 {%for bene in datos%}
                     <tr>
-                        <td>{{bene}}</td>
-                        <td>{{bene}}</td>
-                        <td>{{bene}}</td>
+                        <td>{{bene.0}}</td>
+                        <td>{{bene.1}}</td>
+                        <td>{{bene.2}}</td>
                         <td>
-                            <a href="/editarBene/{{bene}}" class="btn btn-primary">Editar</a>
-                            <a href="/borrarBene/{{bene}}" class="btn btn-primary">Borrar</a>
+                            <a href="/editarBene/{{bene.0}}" class="btn btn-primary">Editar</a>
+                            <a href="/borrarBene/{{bene.0}}" class="btn btn-primary">Borrar</a>
                         </td>
 
                     </tr>
