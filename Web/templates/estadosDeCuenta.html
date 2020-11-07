@@ -1,74 +1,26 @@
 {% extends "layout.html" %}
 {% block body %}
-;<h1>Estados de Cuenta</h1>
+<h1>Estados de cuenta más recientes</h1>
 <section class="contenedor flex">
-    <div class="bloque">
-        <h2>Estado 1</h2>
-        <hr>
-        <p>Fecha Inicial:</p>
-        <p>10/10/2020 
-        </p>
-        <p>Fecha Final:</p>
-        <p>5/11/2020
-        </p>
-        <hr>
-        <p>Saldo</p>
-        <p>Anterior 2000 
-            Nuevo 5000
-        </p>
-        <hr>
-        <button type="submit" class="btn btn-primary btn-block btn-large">Ver detalles</button>
-    </div>
-    <div class="bloque">
-        <h2>Estado 2</h2>
-        <hr>
-        <p>Fecha Inicial:</p>
-        <p>10/10/2020 
-        </p>
-        <p>Fecha Final:</p>
-        <p>5/11/2020
-        </p>
-        <hr>
-        <p>Saldo</p>
-        <p>Anterior 2000 
-            Nuevo 5000
-        </p>
-        <hr>
-        <button type="submit" class="btn btn-primary btn-block btn-large">Ver detalles</button>
-    </div>
-    <div class="bloque">
-        <h2>Estado 3</h2>
-        <hr>
-        <p>Fecha Inicial:</p>
-        <p>10/10/2020 
-        </p>
-        <p>Fecha Final:</p>
-        <p>5/11/2020
-        </p>
-        <hr>
-        <p>Saldo</p>
-        <p>Anterior 2000 
-            Nuevo 5000
-        </p>
-        <hr>
-        <button type="submit" class="btn btn-primary btn-block btn-large">Ver detalles</button>
-    </div>
-    <div class="bloque">
-        <h2>Estado 4</h2>
-        <hr>
-        <p>Fecha Inicial:</p>
-        <p> 10/10/2020 
-        </p>
-        <p>Fecha Final:</p>
-        <p> 5/11/2020
-        </p>
-        <hr>
-        <p>Saldo</p>
-        <p>Anterior 2000 
-            Nuevo 5000
-        </p>
-        <hr>
-        <button type="submit" class="btn btn-primary btn-block btn-large">Ver detalles</button>
-    </div>
+    {%for estado in datos%}
+        <div class="bloque">
+            <h2>Estado</h2>
+            <hr>
+            <p>Fecha Inicial:</p>
+            <p>{{estado[0]}}
+            </p>
+            <p>Fecha Final:</p>
+            <p>{{estado[1]}}
+            </p>
+            <hr>
+            <p>Saldo</p>
+            <p>Anterior {{estado[2]}}</p>
+            <p>Nuevo {{estado[3]}}</p>
+            <hr>
+            <button type="submit" class="btn btn-primary btn-block btn-large">Ver detalles</button>
+        </div>
+    {%endfor%}
+    
+    
   </section>
 {% endblock %}
