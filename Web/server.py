@@ -44,15 +44,18 @@ def main():
 #ruta de los beneficiarios
 @app.route('/beneficiario')
 def beneficiario():
-    #cursor.execute("exec verPersona 22")
-    #data=cursor.fetchall()
+    cursor.execute("exec verBeneficiario")
+    data=cursor.fetchall()
     #print(data)
-    data=(('1','vsdvdvf','3'),('2','vsdvdvf','5'),('3','vsdvdvf','8'))
+    #data=(('1','vsdvdvf','3'),('2','vsdvdvf','5'),('3','vsdvdvf','8'))
     return render_template('beneficiario.html',datos=data)
 
-@app.route('/insertarBene')
+@app.route('/insertarBene',methods=['POST'])
 def insertarBene():
-    flash("Insertado Correctamente")
+    doc = request.form['valorDoc']
+    porcentaje = request.form['porcentaje']
+    parentezco = request.form['parentezco']
+    flash('valor insertado correctamente')
     return redirect(url_for('beneficiario'))
 
 @app.route('/editarBene/<ide>')
