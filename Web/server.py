@@ -48,6 +48,7 @@ def beneficiario():
     numeroDeCuenta=session['numeroDeCuenta']
     cursor.execute("exec verBeneficiario "+str(numeroDeCuenta))
     data=cursor.fetchall()
+    cursor.commit()
     #data=(('1','vsdvdvf','3'),('2','vsdvdvf','5'),('3','vsdvdvf','8'))
     return render_template('beneficiario.html',datos=data)
 
@@ -58,6 +59,7 @@ def insertarBene():
     parentezco = request.form['parentezco']
     cuenta=session["numeroDeCuenta"]
     cursor.execute("exec insertarBeneficiario "+str(porcentaje)+","+str(cuenta)+","+str(parentezco)+","+str(doc))
+    cursor.commit()
     flash('valor insertado correctamente')
     return redirect(url_for('beneficiario'))
 
@@ -67,17 +69,19 @@ def editarBene(ide):
 
 @app.route('/mandarEdit/<doc>',methods=['POST'])
 def mandarEdit(doc):
-    doc = request.form['ValorDocumento']
     porcentaje = request.form['porcentaje']
     parentezco = request.form['parentezco']
     cuenta=session["numeroDeCuenta"]
     cursor.execute("exec modificarBeneficiario "+str(cuenta)+","+str(parentezco)+","+str(doc)+","+str(porcentaje))
+    cursor.commit()
     flash('Se ha editado el valor')
     return redirect(url_for('beneficiario'))
 
 @app.route('/borrarBene/<ide>')
 def borrarBene(ide):
-    cursor.execute("exec borrarBeneficiario "+str(ide))
+    cuenta=session["numeroDeCuenta"]
+    cursor.execute("exec borrarBeneficiario "+str(cuenta)+","+ str(ide))
+    cursor.commit()
     flash('valor borrado correctamente')
     return redirect(url_for('beneficiario'))
 

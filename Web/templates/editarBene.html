@@ -1,9 +1,8 @@
 {% extends "layout.html" %}
 {% block body %}
 <div class="editarBene">
-	<h1>Login</h1>
+	<h1>Editar beneficiario</h1>
     <form action="/mandarEdit/{{doc}}" method="post">
-    	<input type="text" name="ValorDocumento" placeholder="Valor documento Identidad" required="required" />
         <input type="text" name="porcentaje" placeholder="Porcentaje" required="required" />
         <select name="parentezco">
 
