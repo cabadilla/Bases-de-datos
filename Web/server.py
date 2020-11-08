@@ -1,6 +1,7 @@
-from flask import Flask,render_template,url_for,request,redirect,flash
+from flask import Flask,render_template,url_for,request,redirect,flash,session
 from flask_sqlalchemy import SQLAlchemy
 import pyodbc
+
 
 direccion_servidor = 'tcp:serverproyecto.database.windows.net,1433'
 nombre_bd = 'ProyectoBasesI'
@@ -21,7 +22,6 @@ cursor=conexion.cursor()
 
 app = Flask(__name__)
 app.static_folder = 'static'
-
 app.secret_key='mysecretkey'
 
 #ruta de inicio donde se hace el login
@@ -34,6 +34,7 @@ def login():
 def entrar():
     nombre = request.form['u']
     contrasena = request.form['p']
+    session['numeroDeCuenta']=11000001
     return redirect('/main')
 
 #ruta del menu principal
@@ -44,9 +45,9 @@ def main():
 #ruta de los beneficiarios
 @app.route('/beneficiario')
 def beneficiario():
-    cursor.execute("exec verBeneficiario")
+    numeroDeCuenta=session['numeroDeCuenta']
+    cursor.execute("exec verBeneficiario "+str(numeroDeCuenta))
     data=cursor.fetchall()
-    #print(data)
     #data=(('1','vsdvdvf','3'),('2','vsdvdvf','5'),('3','vsdvdvf','8'))
     return render_template('beneficiario.html',datos=data)
 
@@ -55,21 +56,30 @@ def insertarBene():
     doc = request.form['valorDoc']
     porcentaje = request.form['porcentaje']
     parentezco = request.form['parentezco']
+    cuenta=session["numeroDeCuenta"]
+    cursor.execute("exec insertarBeneficiario "+str(porcentaje)+","+str(cuenta)+","+str(parentezco)+","+str(doc))
     flash('valor insertado correctamente')
     return redirect(url_for('beneficiario'))
 
 @app.route('/editarBene/<ide>')
 def editarBene(ide):
-    flash(ide)
-    return redirect(url_for('beneficiario'))
+    return render_template("editarBene.html",doc=ide)
 
-@app.route('/consultarBene')
-def consultarBene():
-    pass
+@app.route('/mandarEdit/<doc>',methods=['POST'])
+def mandarEdit(doc):
+    doc = request.form['ValorDocumento']
+    porcentaje = request.form['porcentaje']
+    parentezco = request.form['parentezco']
+    cuenta=session["numeroDeCuenta"]
+    cursor.execute("exec modificarBeneficiario "+str(cuenta)+","+str(parentezco)+","+str(doc)+","+str(porcentaje))
+    flash('Se ha editado el valor')
+    return redirect(url_for('beneficiario'))
 
 @app.route('/borrarBene/<ide>')
 def borrarBene(ide):
-    pass
+    cursor.execute("exec borrarBeneficiario "+str(ide))
+    flash('valor borrado correctamente')
+    return redirect(url_for('beneficiario'))
 
 #ruta de los estados de cuenta
 @app.route('/estadosDeCuenta')

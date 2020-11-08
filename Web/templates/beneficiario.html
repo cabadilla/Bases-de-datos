@@ -15,7 +15,23 @@
         <form action="/insertarBene" method="POST">
             <input type="text" name="valorDoc" placeholder="Valor documento identidad" required="required" />
             <input type="text" name="porcentaje" placeholder="porcentaje" required="required" />
-            <input type="text" name="parentezco" placeholder="Parentezco" required="required" />
+            <select name="parentezco">
+
+                <option value="1">Padre</option>
+                
+                <option value="2">Madre</option>
+                
+                <option value="3">Hijo</option>
+
+                <option value="4">Hija</option>
+
+                <option value="6">Hermana</option>
+
+                <option value="7">Amigo</option>
+
+                <option value="8">Amiga</option>
+                
+                </select>
             <button class="btn btn-primary">Insertar</button>
         </form>
 
@@ -35,8 +51,8 @@
                 {%for bene in datos%}
                     <tr>
                         <td>{{bene.0}}</td>
-                        <td>{{bene.1}}</td>
                         <td>{{bene.2}}</td>
+                        <td>{{bene.1}}</td>
                         <td>
                             <a href="/editarBene/{{bene.0}}" class="btn btn-primary">Editar</a>
                             <a href="/borrarBene/{{bene.0}}" class="btn btn-primary">Borrar</a>

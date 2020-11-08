@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="editarBene">
+	<h1>Login</h1>
+    <form action="/mandarEdit/{{doc}}" method="post">
+    	<input type="text" name="ValorDocumento" placeholder="Valor documento Identidad" required="required" />
+        <input type="text" name="porcentaje" placeholder="Porcentaje" required="required" />
+        <select name="parentezco">
+
+            <option value="1">Padre</option>
+            
+            <option value="2">Madre</option>
+            
+            <option value="3">Hijo</option>
+
+            <option value="4">Hija</option>
+
+            <option value="6">Hermana</option>
+
+            <option value="7">Amigo</option>
+
+            <option value="8">Amiga</option>
+            
+            </select>
+        <button type="submit" class="btn btn-primary btn-block btn-large">Editar</button>
+    </form>
+</div>
+
+{% endblock %}
