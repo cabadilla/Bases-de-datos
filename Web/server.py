@@ -58,14 +58,24 @@ def insertarBene():
     porcentaje = request.form['porcentaje']
     parentezco = request.form['parentezco']
     cuenta=session["numeroDeCuenta"]
-    cursor.execute("exec insertarBeneficiario "+str(porcentaje)+","+str(cuenta)+","+str(parentezco)+","+str(doc)+",0")
-    data=cursor.fetchall()
-    cursor.commit()
-    
-    if data[0][0]==1:
-        flash('valor insertado correctamente')
+
+    cursor.execute("exec verPorcentaje "+str(cuenta))
+    sumaPorcentaje=cursor.fetchall()
+    suma=sumaPorcentaje[0][0]
+
+    if suma+int(porcentaje)<=100:
+        cursor.execute("exec insertarBeneficiario "+str(porcentaje)+","+str(cuenta)+","+str(parentezco)+","+str(doc)+",0")
+        data=cursor.fetchall()
+        cursor.commit()
+        if data[0][0]==1:
+            if suma+int(porcentaje)==100:
+                flash('valor insertado correctamente')
+            else:
+                flash('valor insertado correctamente, recuerde que la suma de los tres beneficiarios debe de ser 100')
+        else:
+            flash('Solo pueden existir tres beneficiarios asociados a una cuenta')
     else:
-        flash('Solo pueden existir tres beneficiarios asociados a una cuenta')
+        flash('La suma de los porcentaje no puden pasar de 100, cambie el valor')
     return redirect(url_for('beneficiario'))
 
 @app.route('/editarBene/<ide>')
