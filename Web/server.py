@@ -34,7 +34,23 @@ def login():
 def entrar():
     nombre = request.form['u']
     contrasena = request.form['p']
-    session['numeroDeCuenta']=11000001
+    cursor.execute("exec verUsuario "+contrasena+","+nombre)
+    data=cursor.fetchall()
+    if data==[]:
+        flash('Digite un usuario o contrasena validos')
+        return redirect('/')
+    else:
+        session['usuario']=data[0][0]
+        session['contrasena']=data[0][1]
+        session['admin']=data[0][2]
+
+    cursor.execute("exec verUsuarioVer "+session['usuario'])
+    data=cursor.fetchall()
+    session['numeroDeCuenta']=data[0][1]
+    return redirect('/main')
+
+@app.route('/volverAlMenu')
+def volverAlMenu():
     return redirect('/main')
 
 #ruta del menu principal
