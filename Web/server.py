@@ -62,8 +62,10 @@ def main():
 @app.route('/beneficiario')
 def beneficiario():
     numeroDeCuenta=session['numeroDeCuenta']
-    cursor.execute("exec verBeneficiario "+str(numeroDeCuenta))
+    cursor.execute("exec verBeneficiarioPersona "+str(numeroDeCuenta))
     data=cursor.fetchall()
+    cursor.execute("exec verBeneficiarioNoPersona "+str(numeroDeCuenta))
+    data+=cursor.fetchall()
     cursor.commit()
     #data=(('1','vsdvdvf','3'),('2','vsdvdvf','5'),('3','vsdvdvf','8'))
     return render_template('beneficiario.html',datos=data)
@@ -98,12 +100,24 @@ def insertarBene():
 def editarBene(ide):
     return render_template("editarBene.html",doc=ide)
 
+
+
 @app.route('/mandarEdit/<doc>',methods=['POST'])
 def mandarEdit(doc):
     porcentaje = request.form['porcentaje']
     parentezco = request.form['parentezco']
+    nombre = request.form['nombre']
     cuenta=session["numeroDeCuenta"]
-    cursor.execute("exec modificarBeneficiario "+str(cuenta)+","+str(parentezco)+","+str(doc)+","+str(porcentaje))
+    cursor.execute("exec modificarBeneficiario "+str(cuenta)+","+str(parentezco)+","+str(doc)+","+str(porcentaje)+","+nombre)
+    cuenta=session["numeroDeCuenta"]
+    cursor.execute("exec verPorcentaje "+str(cuenta))
+    sumaPorcentaje=cursor.fetchall()
+    suma=sumaPorcentaje[0][0]
+    if suma+int(porcentaje)>100:
+        flash('No se a podido editar, inserte un porcentaje valido')
+        return redirect(url_for('beneficiario'))
+    elif suma+int(porcentaje)<100:
+        flash('Recuerde que la suma de los porcentajes debe de ser 100')
     cursor.commit()
     flash('Se ha editado el valor')
     return redirect(url_for('beneficiario'))
