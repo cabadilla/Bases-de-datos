@@ -29,6 +29,12 @@ app.secret_key='mysecretkey'
 def login():
     return render_template('login.html')
 
+
+@app.route('/irCuenta/<cuenta>')
+def irCuenta(cuenta):
+    session["numeroDeCuenta"]=cuenta
+    return redirect('/main')
+
 #se entra a la sesion del usuario correcto y se validan los datos
 @app.route('/entrar',methods=['POST'])
 def entrar():
@@ -36,6 +42,7 @@ def entrar():
     contrasena = request.form['p']
     cursor.execute("exec verUsuario "+contrasena+","+nombre)
     data=cursor.fetchall()
+    print(data)
     if data==[]:
         flash('Digite un usuario o contrasena validos')
         return redirect('/')
@@ -46,8 +53,16 @@ def entrar():
 
     cursor.execute("exec verUsuarioVer "+session['usuario'])
     data=cursor.fetchall()
-    session['numeroDeCuenta']=data[0][1]
-    return redirect('/main')
+    return render_template('cuentas.html',datos=data)
+
+
+@app.route('/volverCuentas')
+def volverCuentas():
+    cursor.execute("exec verUsuarioVer "+session['usuario'])
+    data=cursor.fetchall()
+    return render_template('cuentas.html',datos=data)
+
+    return render_template('cuentas.html',datos=data)
 
 @app.route('/volverAlMenu')
 def volverAlMenu():
@@ -64,8 +79,6 @@ def beneficiario():
     numeroDeCuenta=session['numeroDeCuenta']
     cursor.execute("exec verBeneficiarioPersona "+str(numeroDeCuenta))
     data=cursor.fetchall()
-    cursor.execute("exec verBeneficiarioNoPersona "+str(numeroDeCuenta))
-    data+=cursor.fetchall()
     cursor.commit()
     return render_template('beneficiario.html',datos=data)
 
@@ -81,8 +94,11 @@ def insertarBene():
     cursor.execute("exec verPorcentaje "+str(cuenta))
     sumaPorcentaje=cursor.fetchall()
     suma=sumaPorcentaje[0][0]
-
-    if (suma==[]) or (suma+int(porcentaje)<=100):
+    try:
+        suma=suma+int(porcentaje)<=100
+    except:
+        suma=True
+    if suma:
         cursor.execute("exec insertarBeneficiario "+str(porcentaje)+","+str(cuenta)+","+str(parentezco)+","+str(doc)+",0")
         data=cursor.fetchall()
         cursor.commit()
@@ -116,7 +132,7 @@ def insertarPersona():
     telUno = request.form['telUno']
     telDos = request.form['telDos']
     email = request.form['email']
-    cursor.execute("exec insertarPersona "+str(tipoDoc)+","+str(nombre)+","+str(valorDoc)+","+"'"+fechaNaci+"'"+","+str(email)+","+str(telUno)+","+str(telDos))
+    cursor.execute("exec insertarPersona "+str(tipoDoc)+","+str(nombre)+","+str(valorDoc)+","+"'"+fechaNaci+"'"+","+"'"+str(email)+"'"+","+str(telUno)+","+str(telDos))
     cursor.commit() 
     flash("Persona insertada correctamente ya puede usar a la persona de identificacion "+str(valorDoc)+" como beneficiario")
     return redirect(url_for('beneficiario'))

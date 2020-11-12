@@ -74,8 +74,8 @@ body {
 
 .tablaBene {
 	position: absolute;
-	top: 25%;
-	left: 50%;
+	top: 30%;
+	left: 40%;
 	margin: -150px 0 0 -150px;
 	width:1000px;
 	height:1000px;
@@ -96,6 +96,16 @@ body {
 	width:300px;
 	height:300px;
 }
+
+.cuentas{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -150px 0 0 -150px;
+	width:400px;
+	height:400px;
+}
+
 
 select{
 	box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgba(255,255,255,0.2); 

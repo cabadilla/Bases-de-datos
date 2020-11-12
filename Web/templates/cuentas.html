@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<div class="cuentas">
+    <h1>Cuentas disponibles</h1>
+    {%for bene in datos%}
+        <a href="/irCuenta/{{bene.1}}" class="btn btn-primary btn-block btn-large">Cuenta: {{bene.1}}</a>
+    {%endfor%}
+
+</div>
+
+{% endblock %}
