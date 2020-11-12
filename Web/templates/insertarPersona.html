@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<h1>El beneficiario debe de existir en personas para poder insertarlo, inserte los valores de la persona</h1>
+<div class="editarBene">
+	<h3>Insertar Persona</h1>
+    <form action="/insertarPersona" method="post">
+        <input type="text" name="nombre" placeholder="Nombre" required="required" />
+        <input type="text" name="valorDocumentoIdentidad" value={{valorDoc}} readonly />
+        <input type="date" name="fechaNacimiento" placeholder="fecha de Nacimiento" required="required" />
+        <input type="text" name="email" placeholder="Email" required="required" />
+        <input type="text" name="telUno" placeholder="Telefono 1"/>
+        <input type="text" name="telDos" placeholder="Telefono 2" required="required" />
+        <select name="idTipoDocumentoIdentidad">
+        
+            {%for tipo in datos%}
+                <option value={{tipo.0}}>{{tipo.1}}</option>
+            {%endfor%}
+            
+            </select>
+        <button type="submit" class="btn btn-primary btn-block btn-large">Editar</button>
+    </form>
+</div>
+
+
+{% endblock %}

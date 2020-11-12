@@ -67,9 +67,10 @@ def beneficiario():
     cursor.execute("exec verBeneficiarioNoPersona "+str(numeroDeCuenta))
     data+=cursor.fetchall()
     cursor.commit()
-    #data=(('1','vsdvdvf','3'),('2','vsdvdvf','5'),('3','vsdvdvf','8'))
     return render_template('beneficiario.html',datos=data)
 
+
+#ruta de donde se insertan los beneficiarios
 @app.route('/insertarBene',methods=['POST'])
 def insertarBene():
     doc = request.form['valorDoc']
@@ -81,7 +82,7 @@ def insertarBene():
     sumaPorcentaje=cursor.fetchall()
     suma=sumaPorcentaje[0][0]
 
-    if suma+int(porcentaje)<=100:
+    if (suma==[]) or (suma+int(porcentaje)<=100):
         cursor.execute("exec insertarBeneficiario "+str(porcentaje)+","+str(cuenta)+","+str(parentezco)+","+str(doc)+",0")
         data=cursor.fetchall()
         cursor.commit()
@@ -90,16 +91,35 @@ def insertarBene():
                 flash('valor insertado correctamente')
             else:
                 flash('valor insertado correctamente, recuerde que la suma de los tres beneficiarios debe de ser 100')
+        elif data[0][0]==2:
+            cursor.execute("exec verTipoDocumentoIdentidad")
+            data=cursor.fetchall()
+            return render_template("insertarPersona.html",datos=data,valorDoc=doc)
         else:
             flash('Solo pueden existir tres beneficiarios asociados a una cuenta')
     else:
         flash('La suma de los porcentaje no puden pasar de 100, cambie el valor')
     return redirect(url_for('beneficiario'))
 
+#ruta donde se se llama para editar a los beneficiarios
 @app.route('/editarBene/<ide>')
 def editarBene(ide):
     return render_template("editarBene.html",doc=ide)
 
+#ruta donde se insertan las personas en caso de que el beneficiario que se quiera insertar no sea una persona
+@app.route('/insertarPersona',methods=['POST'])
+def insertarPersona():
+    nombre = request.form['nombre']
+    valorDoc = request.form['valorDocumentoIdentidad']
+    tipoDoc = request.form['idTipoDocumentoIdentidad']
+    fechaNaci = request.form['fechaNacimiento']
+    telUno = request.form['telUno']
+    telDos = request.form['telDos']
+    email = request.form['email']
+    cursor.execute("exec insertarPersona "+str(tipoDoc)+","+str(nombre)+","+str(valorDoc)+","+"'"+fechaNaci+"'"+","+str(email)+","+str(telUno)+","+str(telDos))
+    cursor.commit() 
+    flash("Persona insertada correctamente ya puede usar a la persona de identificacion "+str(valorDoc)+" como beneficiario")
+    return redirect(url_for('beneficiario'))
 
 
 @app.route('/mandarEdit/<doc>',methods=['POST'])
