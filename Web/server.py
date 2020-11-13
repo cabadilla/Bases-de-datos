@@ -169,9 +169,14 @@ def borrarBene(ide):
 #ruta de los estados de cuenta
 @app.route('/estadosDeCuenta')
 def estadosDeCuenta():
-    cursor.execute('exec ConsultarEstadoCuenta '+str(session["numeroDeCuenta"]))
+    cursor.execute('exec ConsultarEstadoCuenta '+session["numeroDeCuenta"])
     data=cursor.fetchall()
+    separador=[]
     print(data)
+    if (len(data)>4):
+        separador.append(data[:4])
+        separador.append(data[4:])
+        data=separador
     return render_template('estadosDeCuenta.html',datos=data)
 
 #ruta para ver la informacion del cliente
