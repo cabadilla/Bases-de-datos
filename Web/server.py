@@ -169,10 +169,10 @@ def borrarBene(ide):
 #ruta de los estados de cuenta
 @app.route('/estadosDeCuenta')
 def estadosDeCuenta():
-    sql='exec dbo.ConsultarEstadoCuenta ?'
-    values=(11000001,)
-    datos=cursor.execute(sql,(values))
-    return render_template('estadosDeCuenta.html',datos=datos)
+    cursor.execute('exec ConsultarEstadoCuenta '+str(session["numeroDeCuenta"]))
+    data=cursor.fetchall()
+    print(data)
+    return render_template('estadosDeCuenta.html',datos=data)
 
 #ruta para ver la informacion del cliente
 @app.route('/informacionPersonal')
