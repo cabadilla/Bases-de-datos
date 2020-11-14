@@ -49,15 +49,15 @@ html { width: 100%; height:100%; overflow:scroll; scroll-behavior: smooth;}
 
 
 .bloque {
-	background: #e6e6e6;
-	color: #333;
+	background: #574a55;
+	color: rgb(255, 255, 255);
 	border: 1px solid #333;
 	margin: 10px;
 	padding: 10px;
 	border-radius:5px;
 	box-shadow: 10px 10px 5px rgb(57, 46, 66);
 	width:230px;
-	height:450px;
+	height:550px;
 }
 h1 { color: #fff; text-shadow: 0 0 10px rgba(0,0,0,0.3); letter-spacing:1px; text-align:center; }
 
@@ -171,27 +171,7 @@ h3{
 }
 
 
- /* width */
- .contenedor::-webkit-scrollbar {
-   width: 20px;
- }
- 
- /* Track */
- .contenedor::-webkit-scrollbar-track {
-   box-shadow: inset 0 0 5px rgb(189, 9, 9); 
-   border-radius: 10px;
- }
-  
- /* Handle */
- .contenedor::-webkit-scrollbar-thumb {
-   background: red; 
-   border-radius: 10px;
- }
- 
- /* Handle on hover */
- .contenedor::-webkit-scrollbar-thumb:hover {
-   background: #b30000; 
- }
+
 
 
  caption, td, th {
