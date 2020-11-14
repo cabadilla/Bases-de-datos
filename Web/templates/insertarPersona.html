@@ -4,10 +4,10 @@
 <h1>El beneficiario debe de existir en personas para poder insertarlo, inserte los valores de la persona</h1>
 <div class="editarBene">
 	<h3>Insertar Persona</h1>
-    <form action="/insertarPersona" method="post">
+    <form action="/insertarPersona/{{bene.0}}/{{bene.1}}/{{bene.2}}" method="post">
         <input type="text" name="nombre" placeholder="Nombre" required="required" />
-        <input type="text" name="valorDocumentoIdentidad" value={{valorDoc}} readonly />
-        <input type="date" name="fechaNacimiento" placeholder="fecha de Nacimiento" required="required" />
+        <p>Valor del documento: <input type="text" name="valorDocumentoIdentidad" value={{bene.0}} readonly /></p>
+        <p>Fecha de nacimiento: <input type="date" name="fechaNacimiento" placeholder="fecha de Nacimiento" required="required" /></p>
         <input type="text" name="email" placeholder="Email" required="required" />
         <input type="text" name="telUno" placeholder="Telefono 1"/>
         <input type="text" name="telDos" placeholder="Telefono 2" required="required" />
@@ -18,7 +18,7 @@
             {%endfor%}
             
             </select>
-        <button type="submit" class="btn btn-primary btn-block btn-large">Editar</button>
+        <button type="submit" class="btn btn-primary btn-block btn-large">Insertar</button>
     </form>
 </div>
 

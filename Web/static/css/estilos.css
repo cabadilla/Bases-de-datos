@@ -76,7 +76,7 @@ body {
 
 .tablaBene {
 	position: absolute;
-	top: 30%;
+	top: 40%;
 	left: 40%;
 	margin: -150px 0 0 -150px;
 	width:1000px;
@@ -154,6 +154,9 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
 .insertarBene input{
 	width: 10%;
 }
+p{
+	color: #e6e6e6;
+}
 
 table {
 	width: 60%;
@@ -163,6 +166,9 @@ table {
  }
 
 
+h3{
+	color:#e6e6e6;
+}
 
 
  /* width */
@@ -192,9 +198,6 @@ table {
 	padding: 0.3em;
  }
 
-p{
-	color: #000000;
-}
 
  td{
 	 color: #e6e6e6;
