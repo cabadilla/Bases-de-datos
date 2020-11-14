@@ -13,8 +13,8 @@
 <div class="bene">
     <div class="insertarBene">
         <form action="/insertarBene" method="POST">
-            <input type="text" name="valorDoc" placeholder="Valor documento identidad" required="required" />
-            <input type="text" name="porcentaje" placeholder="porcentaje" required="required" />
+            <input type="number" name="valorDoc" placeholder="Valor documento identidad" required="required" />
+            <input type="number" name="porcentaje" placeholder="porcentaje" max="100" min="1" required="required" />
             <select name="parentezco">
 
                 <option value="1">Padre</option>

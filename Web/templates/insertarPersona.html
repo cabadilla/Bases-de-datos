@@ -9,8 +9,8 @@
         <p>Valor del documento: <input type="text" name="valorDocumentoIdentidad" value={{bene.0}} readonly /></p>
         <p>Fecha de nacimiento: <input type="date" name="fechaNacimiento" placeholder="fecha de Nacimiento" required="required" /></p>
         <input type="text" name="email" placeholder="Email" required="required" />
-        <input type="text" name="telUno" placeholder="Telefono 1"/>
-        <input type="text" name="telDos" placeholder="Telefono 2" required="required" />
+        <input type="number" name="telUno" placeholder="Telefono 1"/>
+        <input type="number" name="telDos" placeholder="Telefono 2" required="required" />
         <select name="idTipoDocumentoIdentidad">
         
             {%for tipo in datos%}

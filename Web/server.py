@@ -42,7 +42,7 @@ def irCuenta(cuenta):
 def entrar():
     nombre = request.form['u']
     contrasena = request.form['p']
-    cursor.execute("exec verUsuario "+contrasena+","+nombre)
+    cursor.execute("exec verUsuario "+"'"+contrasena+"'"+","+"'"+nombre+"'")
     data=cursor.fetchall()
     print(data)
     if data==[]:
