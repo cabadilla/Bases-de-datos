@@ -15,7 +15,7 @@ CREATE PROCEDURE [dbo].[verPorcentajeSinContarBene]
 		BEGIN TRY
 			SELECT SUM(porcentaje)
 			FROM Beneficiario 
-			WHERE (IdCuentaAhorros=@IdCuentaAhorros) and (isActivo=1) and (valorDocumentoIdentidad!=@valorDoc)
+			WHERE (IdCuentaAhorros=@IdCuentaAhorros) AND (isActivo=1) AND (valorDocumentoIdentidad!=@valorDoc)
 
 		END TRY
 		BEGIN CATCH

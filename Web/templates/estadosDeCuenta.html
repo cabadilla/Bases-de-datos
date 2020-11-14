@@ -1,37 +1,40 @@
 {% extends "layout.html" %}
 {% block body %}
- 
-<h1>Estados de cuenta más recientes</h1>
-<a href="/volverAlMenu" class="btn btn-primary">Regresar al menu principal</a>
-{% for estados in datos %}
-<section class="contenedor flex">
-    {%for estado in estados%}
-        <div class="bloque">
-            <h2>Estado</h2>
-            <hr>
-            <p>Fecha Inicial:</p>
-            <p>{{estado.0}}</p>
-
-            <p>Fecha Final:</p>
-            <p>{{estado.1}}</p>
-
-            <hr>
-
-            <p>Saldo</p>
-            <p>Anterior {{estado.2}}</p>
-            <p>Nuevo {{estado.3}} </p>
-            <p>Débitos: 0</p>
-            <p>Créditos: 0</p>
-            <p>Intereses: 0</p>
-            
-            <hr>
-
-            <button type="submit" class="btn btn-primary btn-block btn-large">Ver detalles</button>
-        </div>
-    {%endfor%}
-
+ <div class="estadosDeCuenta">
+    <h1>Estados de cuenta más recientes</h1>
+    <a href="/volverAlMenu" class="btn btn-primary">Regresar al menu principal</a>
+    {% for estados in datos %}
+    <section class="contenedor flex">
+        {%for estado in estados%}
+            <div class="bloque">
+                <h2>Estado</h2>
+                <hr>
+                <p>Fecha Inicial:</p>
+                <p>{{estado.0}}</p>
     
-  </section>
-{%endfor%}
+                <p>Fecha Final:</p>
+                <p>{{estado.1}}</p>
+    
+                <hr>
+    
+                <p>Saldo</p>
+                <p>Anterior {{estado.2}}</p>
+                <p>Nuevo {{estado.3}} </p>
+                <p>Débitos: 0</p>
+                <p>Créditos: 0</p>
+                <p>Intereses: 0</p>
+                
+                <hr>
+    
+                <button type="submit" class="btn btn-primary btn-block btn-large">Ver detalles</button>
+            </div>
+        {%endfor%}
+    
+        
+      </section>
+      {%endfor%}
+ </div>
+
+
 
 {% endblock %}

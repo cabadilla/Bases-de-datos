@@ -3,8 +3,8 @@
 <div class="editarBene">
 	<h1>Editar beneficiario</h1>
     <form action="/mandarEdit/{{doc}}" method="post">
-        <input type="number" name="porcentaje" placeholder="Porcentaje" required="required" max="100" min="1" />
-        <input type="text" name="nombre" placeholder="Nombre" required="required" />
+        <input type="number" name="porcentaje" placeholder="Porcentaje" value={{por}} required="required" max="100" min="1" />
+        <input type="text" name="nombre" placeholder="Nombre" value={{nom}} required="required" />
         <select name="parentezco">
 
             <option value="1">Padre</option>

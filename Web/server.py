@@ -123,9 +123,9 @@ def insertarBene():
     return redirect(url_for('beneficiario'))
 
 #ruta donde se se llama para editar a los beneficiarios
-@app.route('/editarBene/<ide>')
-def editarBene(ide):
-    return render_template("editarBene.html",doc=ide)
+@app.route('/editarBene/<ide>/<porcentaje>/<parentezco>/<nombre>')
+def editarBene(ide,porcentaje,parentezco,nombre):
+    return render_template("editarBene.html",doc=ide,por=porcentaje,pare=parentezco,nom=nombre)
 
 #ruta donde se insertan las personas en caso de que el beneficiario que se quiera insertar no sea una persona
 #recibe los valores del beneficiario para insertarlos una vez que inserte a la persona
@@ -137,8 +137,14 @@ def insertarPersona(doc,porcentaje,parentezco):
     fechaNaci = request.form['fechaNacimiento']
     telUno = request.form['telUno']
     telDos = request.form['telDos']
+
+    if telUno=="":
+        telUno=0
+    if telDos=="":
+        telDos=0
+
     email = request.form['email']
-    cursor.execute("exec insertarPersona "+str(tipoDoc)+","+str(nombre)+","+str(valorDoc)+","+"'"+fechaNaci+"'"+","+"'"+str(email)+"'"+","+str(telUno)+","+str(telDos))
+    cursor.execute("exec insertarPersona "+str(tipoDoc)+","+"'"+str(nombre)+"'"+","+str(valorDoc)+","+"'"+fechaNaci+"'"+","+"'"+str(email)+"'"+","+str(telUno)+","+str(telDos))
     cursor.commit()
     cursor.execute("exec insertarBeneficiario "+str(porcentaje)+","+session["numeroDeCuenta"]+","+str(parentezco)+","+str(doc)+", 0")
     cursor.commit()
@@ -164,7 +170,7 @@ def mandarEdit(doc):
     if suma:
         parentezco = request.form['parentezco']
         nombre = request.form['nombre']
-        cursor.execute("exec modificarBeneficiario "+str(cuenta)+","+str(parentezco)+","+str(doc)+","+str(porcentaje)+","+nombre)
+        cursor.execute("exec modificarBeneficiario "+str(cuenta)+","+str(parentezco)+","+str(doc)+","+str(porcentaje)+","+"'"+nombre+"'")
         cuenta=session["numeroDeCuenta"]
         flash("valor editado correctamente")
     else:
@@ -201,9 +207,6 @@ def estadosDeCuenta():
     
     return render_template('estadosDeCuenta.html',datos=data)
 
-#ruta para ver la informacion del cliente
-@app.route('/informacionPersonal')
-def informacionPersonal():
-    return render_template('informacionPersonal.html')
+
 
 app.run(port=3000, debug=True)
