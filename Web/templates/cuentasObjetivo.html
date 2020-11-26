@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+{% block body %}
+
+{% with messages =get_flashed_messages()%}
+
+{%if messages%}
+{%for message in messages%}
+<p class="CuentaOb">{{message}}</p>
+{%endfor%}
+{%endif%}
+
+{%endwith%}
+<div class="bene">
+    <h1>Cuentas Objetivo</h1>
+    
+    <a href="/volverAlMenu" class="btn btn-primary">Regresar al menu principal</a>
+    <div class="tablaCuentaObjetivo">
+        <table>
+            <thead>
+                <tr>
+                <td>Descripcion</td>
+                <td>Dias de rebajo</td>
+                <td>Cuota</td>
+                <td>Fecha Inicio</td>
+                <td>Fecha Fin</td>
+                </tr>
+            </thead>
+            <tbody>
+                {%for CuentaObjetivo in datos%}
+                    <tr>
+                        <td>{{CuentaObjetivo.5}}</td>
+                        <td>{{CuentaObjetivo.0}}</td>
+                        <td>{{CuentaObjetivo.2}}</td>
+                        <td>{{CuentaObjetivo.1}}</td>
+                        <td>{{CuentaObjetivo.3}}</td>
+                        <td>{{CuentaObjetivo.4}}</td>
+                    </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
+    <hr>
+    <div class="insertarCuentaObjetivo">
+        <h2>Crear nueva cuenta objetivo</h2>
+        <form action="/insertarCuentaObjetivo" method="POST">
+            <input type="number" name="descripcion" placeholder="Descripcion" required="required" />
+            <input type="number" name="cuota" placeholder="Cuota" max="100" min="1" required="required" />
+            <p>Fecha de nacimiento: <input type="date" name="diaRebajo" placeholder="Dia de rebajo" required="required" /></p>
+            <button class="btn btn-primary">Crear</button>
+        </form>
+    </div>
+
+
+
+</div>
+
+{% endblock %}

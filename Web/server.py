@@ -208,5 +208,14 @@ def estadosDeCuenta():
     return render_template('estadosDeCuenta.html',datos=data)
 
 
+#ruta de las cuentas objetivo
+@app.route('/cuentasObjetivo')
+def cuentasObjetivo():
+    #numeroDeCuenta=session['numeroDeCuenta']
+    #cursor.execute("exec ????????? "+str(numeroDeCuenta))
+    #data=cursor.fetchall()
+    #cursor.commit()
+    return render_template('cuentasObjetivo.html')
+
 
 app.run(port=3000, debug=True)
