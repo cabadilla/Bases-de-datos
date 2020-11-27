@@ -211,11 +211,18 @@ def estadosDeCuenta():
 #ruta de las cuentas objetivo
 @app.route('/cuentasObjetivo')
 def cuentasObjetivo():
-    #numeroDeCuenta=session['numeroDeCuenta']
-    #cursor.execute("exec ????????? "+str(numeroDeCuenta))
-    #data=cursor.fetchall()
-    #cursor.commit()
     return render_template('cuentasObjetivo.html')
 
+#ruta de las cuentas objetivo
+@app.route('/crearCuentaObjetivo',methods=['POST'])
+def crearCuentasObjetivo():
+    descripcion = request.form['descripcion']
+    cuota = request.form['cuota']
+    diaRebajo = request.form['diaRebajo']
+    numeroDeCuenta=session['numeroDeCuenta']
+    cursor.execute("exec insertarCuentaObjetivo "+str(numeroDeCuenta)+str(diaRebajo)+str(cuota)+str(descripcion))
+    data=cursor.fetchall()
+    cursor.commit()
+    return redirect(url_for('cuentasObjetivo'))
 
 app.run(port=3000, debug=True)
