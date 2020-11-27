@@ -190,7 +190,6 @@ def borrarBene(ide):
 @app.route('/estadosDeCuenta')
 def estadosDeCuenta():
     cuenta=session["numeroDeCuenta"]
-    print(cuenta)
     cursor.execute('exec ConsultarEstadoCuenta '+str(cuenta))
     data=cursor.fetchall()
     separador=[]
@@ -211,18 +210,38 @@ def estadosDeCuenta():
 #ruta de las cuentas objetivo
 @app.route('/cuentasObjetivo')
 def cuentasObjetivo():
-    return render_template('cuentasObjetivo.html')
+    cuenta=session["numeroDeCuenta"]
+    cursor.execute('exec verCuentaObjetivo '+str(cuenta))
+    data=cursor.fetchall()
+    print(data)
+    return render_template('cuentasObjetivo.html',data=data)
 
-#ruta de las cuentas objetivo
-@app.route('/crearCuentaObjetivo',methods=['POST'])
+
+#ruta para crear una Cuenta Objetivo
+@app.route('/crearCuentaObjetivo')
 def crearCuentasObjetivo():
+    return render_template("crearCuentaObjetivo.html")
+@app.route('/crearCuentaObjetivoo', methods=['POST'])
+def crearCuentasObjetivoo():
     descripcion = request.form['descripcion']
     cuota = request.form['cuota']
     diaRebajo = request.form['diaRebajo']
     numeroDeCuenta=session['numeroDeCuenta']
-    cursor.execute("exec insertarCuentaObjetivo "+str(numeroDeCuenta)+str(diaRebajo)+str(cuota)+str(descripcion))
-    data=cursor.fetchall()
+    fechaFinal = request.form['fechaFinal']
+    cursor.execute("exec insertarCuentaObjetivo "+numeroDeCuenta+",'"+fechaFinal+"',"+diaRebajo+","+cuota+","+str(descripcion))
     cursor.commit()
     return redirect(url_for('cuentasObjetivo'))
+#ruta para volver a las cuentas Objetivo
+@app.route('/volverCuentaObjetivo')
+def volverCuentasObjetivo():
+    return redirect('/cuentasObjetivo')
+
+@app.route('/desactivarCuentaObjetivo/<descripcion>')
+def DesactivarCuentasObjetivo(descripcion):
+    numeroDeCuenta=session['numeroDeCuenta']
+    cursor.execute("exec borrarCuentaObjetivo "+numeroDeCuenta+","+descripcion)
+    cursor.commit()
+    return redirect(url_for('cuentasObjetivo'))
+
 
 app.run(port=3000, debug=True)

@@ -5,15 +5,7 @@
     <h1>Cuentas Objetivo</h1>
     
     <a href="/volverAlMenu" class="btn btn-primary">Regresar al menu principal</a>
-    <div class="insertarCuentaObjetivo">
-        <h2>Crear nueva cuenta objetivo</h2>
-        <form action="/crearCuentaObjetivo" method="post">
-            <input type="number" name="descripcion" placeholder="Descripcion" required="required" />
-            <input type="number" name="cuota" placeholder="Cuota" required="required" />
-            <p>Fecha final: <input type="date" name="diaRebajo" placeholder="Dia de rebajo" required="required" /></p>
-            <button class="btn btn-primary">Crear</button>
-        </form>
-    </div>
+    <a href="/crearCuentaObjetivo" class="btn btn-primary">Crear una cuenta Objetivo</a>
     <div class="tablaCuentaObjetivo">
         <table>
             <thead>
@@ -26,14 +18,17 @@
                 </tr>
             </thead>
             <tbody>
-                {%for CuentaObjetivo in datos%}
+                {%for CuentaObjetivo in data%}
                     <tr>
-                    <td>{{CuentaObjetivo.5}}</td>
-                    <td>{{CuentaObjetivo.0}}</td>
-                    <td>{{CuentaObjetivo.2}}</td>
-                    <td>{{CuentaObjetivo.1}}</td>
-                    <td>{{CuentaObjetivo.3}}</td>
                     <td>{{CuentaObjetivo.4}}</td>
+                    <td>{{CuentaObjetivo.2}}</td>
+                    <td>{{CuentaObjetivo.3}}</td>
+                    <td>{{CuentaObjetivo.0}}</td>
+                    <td>{{CuentaObjetivo.1}}</td>
+                    <td>
+                        <a href="/modificarCuentaObajetivo/{{CuentaObjetivo.4}}" class="btn btn-primary">Modificar</a>
+                        <a href="/desactivarCuentaObjetivo/{{CuentaObjetivo.4}}" class="btn btn-primary">desactivar</a>
+                    </td>
                     </tr>
                 {%endfor%}
             </tbody>

@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<div class="CuentasOBjetivo">
+    <h1>Cuentas Objetivo</h1>
+    
+    <a href="/volverCuentaObjetivo" class="btn btn-primary">Atrás</a>
+    <div class="insertarCuentaObjetivo">
+        <h2>Crear nueva cuenta objetivo</h2>
+        <form action="/crearCuentaObjetivoo" method="post">
+            <input type="text" name="descripcion" placeholder="Descripcion" required="required" />
+            <input type="number" name="cuota" placeholder="Cuota" required="required" />
+            <p>Dia del mes para rebajo: <input type="number" name="diaRebajo" placeholder="Dia de rebajo" required="required" /></p>
+            <p>Fecha final: <input type="date" name="fechaFinal" placeholder="Fecha final" max="31" min="1" required="required" /></p>
+            <button class="btn btn-primary">Crear</button>
+        </form>
+    </div>
+    
+</div>
+
+{% endblock %}
