@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block body %}
+<h1>Modificar Cuenta Objetivo</h1>
+<div class="modificarCuentasO">
+	
+    <form action="/modificarCO/{{descripcion}}" method="post">
+        <p> Descripcion vieja: <input type="text" name="descripcionV" placeholder={{descripcion}} required="required" /></p>
+        <p> Descripcion nueva:<input type="text" name="descripcionN" required="required" /></p>
+        <button class="btn btn-primary">Modificar</button>
+    </form>
+</div>
+
+{% endblock %}

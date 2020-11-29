@@ -151,6 +151,7 @@ def insertarPersona(doc,porcentaje,parentezco):
     flash("Persona y beneficiario insertados correctamente")
     return redirect(url_for('beneficiario'))
 
+
 #ruta que manda el edit del benefiario
 ''' dentro de ella antes de editar llama a un SP que suma los porcentajes sin contar el que el tiene, una vez se valida 
 que los porcentajes son correctos lleva a cabo el edit esta ruta recibe el valor del documento para saber que valor tiene que editar'''
@@ -177,6 +178,8 @@ def mandarEdit(doc):
         flash("El valor no se ha podido editar, vuelva a intentarlo digitando un porcentaje valido")
     
     return redirect(url_for('beneficiario'))
+
+
 # ruta que lleva a cabo el borrado logico del beneficiario
 @app.route('/borrarBene/<ide>')
 def borrarBene(ide):
@@ -185,6 +188,7 @@ def borrarBene(ide):
     cursor.commit()
     flash('valor borrado correctamente')
     return redirect(url_for('beneficiario'))
+
 
 #ruta de los estados de cuenta
 @app.route('/estadosDeCuenta')
@@ -221,6 +225,8 @@ def cuentasObjetivo():
 @app.route('/crearCuentaObjetivo')
 def crearCuentasObjetivo():
     return render_template("crearCuentaObjetivo.html")
+
+
 @app.route('/crearCuentaObjetivoo', methods=['POST'])
 def crearCuentasObjetivoo():
     descripcion = request.form['descripcion']
@@ -231,15 +237,33 @@ def crearCuentasObjetivoo():
     cursor.execute("exec insertarCuentaObjetivo "+numeroDeCuenta+",'"+fechaFinal+"',"+diaRebajo+","+cuota+","+str(descripcion))
     cursor.commit()
     return redirect(url_for('cuentasObjetivo'))
+
+
 #ruta para volver a las cuentas Objetivo
 @app.route('/volverCuentaObjetivo')
 def volverCuentasObjetivo():
     return redirect('/cuentasObjetivo')
 
+
 @app.route('/desactivarCuentaObjetivo/<descripcion>')
 def DesactivarCuentasObjetivo(descripcion):
     numeroDeCuenta=session['numeroDeCuenta']
     cursor.execute("exec borrarCuentaObjetivo "+numeroDeCuenta+","+descripcion)
+    cursor.commit()
+    return redirect(url_for('cuentasObjetivo'))
+
+#ruta donde se se llama para modificar las Cuentas objetivo
+@app.route('/modificarCuentaObjetivo/<descrip>')
+def modificarCuentaObjetivo(descrip):
+    return render_template("modificarCuentaObjetivo.html",descripcion=descrip)
+
+@app.route('/modificarCO/<descrip>',methods=['POST'])
+def modificarCO(descrip):
+    numeroDeCuenta = session['numeroDeCuenta']
+    descripcionV = request.form['descripcionV']
+    descripcionN = request.form['descripcionN']
+    print(descripcionV,descripcionN)
+    cursor.execute("exec modificarCuentaObjetivo "+descripcionN+","+descripcionV+","+numeroDeCuenta)
     cursor.commit()
     return redirect(url_for('cuentasObjetivo'))
 
