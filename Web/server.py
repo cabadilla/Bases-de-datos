@@ -179,6 +179,16 @@ def mandarEdit(doc):
     
     return redirect(url_for('beneficiario'))
 
+#ruta para buscar el detalle en los movimientos
+
+@app.route('/buscar',methods=['POST'])
+def buscar():
+    detalle=request.form['detalle']
+    cuenta=session["numeroDeCuenta"]
+    cursor.execute("exec buscarDescripcion "+ "'"+str(detalle)+"'"+","+"'"+str(cuenta)+"'")
+    detalle=cursor.fetchall()
+    return render_template('hacerBusqueda.html',detalles=detalle)
+
 
 # ruta que lleva a cabo el borrado logico del beneficiario
 @app.route('/borrarBene/<ide>')

@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<div class="tablaBuscar">
+    <table>
+        <thead>
+            <tr>
+            <td>Fecha</td>
+            <td>Descripcion</td>
+            <td>Monto</td>
+            <td>Nuevo saldo</td>
+            <td>Tipo de movimiento</td>
+
+            </tr>
+        </thead>
+        <tbody>
+            {%for deta in detalles%}
+                <tr>
+                    <td>{{deta.0}}</td>
+                    <td>{{deta.1}}</td>
+                    <td>{{deta.2}}</td>
+                    <td>{{deta.3}}</td>
+                    <td>{{deta.4}}</td>
+                    
+                   
+                </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock %}
