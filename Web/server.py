@@ -197,19 +197,34 @@ def estadosDeCuenta():
     cursor.execute('exec ConsultarEstadoCuenta '+str(cuenta))
     data=cursor.fetchall()
     separador=[]
-    print(data)
+    print( "estados consultados", data)
     for index,i in enumerate(data):
         for indexx,j in enumerate(i):
             if (j == None):
-                    data[index][indexx] = "----"
-    if (len(data)>4):
+                data[index][indexx] = "----"
 
+    if (len(data)>4):
         separador.append(data[:4])
         separador.append(data[4:])
         data=separador
+    else:
+        data=[data]
     
     return render_template('estadosDeCuenta.html',datos=data)
 
+#ruta para crear una Cuenta Objetivo
+@app.route('/moverAVerDetallesdeEstadodeCuenta/<id>')
+def moverAVerDetallesdeEstadodeCuenta(id):
+    cursor.execute('exec verMovimientosCAdeEstadoCuenta '+str(id))
+    data=cursor.fetchall()
+    print(data)
+    return render_template("verDetallesEstadoCuenta.html",data=data)
+
+
+#ruta para volver a las cuentas Objetivo
+@app.route('/volverEstadoCuenta')
+def volverEstadoCuenta():
+    return redirect('/estadosDeCuenta')
 
 #ruta de las cuentas objetivo
 @app.route('/cuentasObjetivo')
@@ -217,7 +232,6 @@ def cuentasObjetivo():
     cuenta=session["numeroDeCuenta"]
     cursor.execute('exec verCuentaObjetivo '+str(cuenta))
     data=cursor.fetchall()
-    print(data)
     return render_template('cuentasObjetivo.html',data=data)
 
 

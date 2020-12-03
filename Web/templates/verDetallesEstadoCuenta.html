@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="DetallesEstadoCuenta">
+    <h1>Movimientos de estado de cuenta</h1>
+    
+    <a href="/volverEstadoCuenta" class="btn btn-primary">Regresar a estados de cuenta</a>
+    <div class="tablaCuentaObjetivo">
+        <table>
+            <thead>
+                <tr>
+                <td>Fecha</td>
+                <td>Descripcion</td>
+                <td>Saldo Anterior</td>
+                <td>Saldo Nuevo</td>
+                </tr>
+            </thead>
+            <tbody>
+                {%for movimiento in data%}
+                    <tr>
+                    <td>{{movimiento.0}}</td>
+                    <td>{{movimiento.1}}</td>
+                    <td>{{movimiento.2}}</td>
+                    <td>{{movimiento.3}}</td>
+                    
+                    </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
+    
+</div>
+{% endblock %}
