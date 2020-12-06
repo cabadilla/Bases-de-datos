@@ -206,28 +206,32 @@ def estadosDeCuenta():
     cuenta=session["numeroDeCuenta"]
     cursor.execute('exec ConsultarEstadoCuenta '+str(cuenta))
     data=cursor.fetchall()
+    cantidades=[]
     separador=[]
     print( "estados consultados", data)
     for index,i in enumerate(data):
+        
         for indexx,j in enumerate(i):
             if (j == None):
                 data[index][indexx] = "----"
-
+            if indexx==4:
+                cursor.execute('exec ConsultarCantidadMovimientosEstado '+str(j)+","+str(cuenta))
+                cant=cursor.fetchall()
+                cantidades.append(cant[0])
     if (len(data)>4):
         separador.append(data[:4])
         separador.append(data[4:])
         data=separador
     else:
         data=[data]
-    
-    return render_template('estadosDeCuenta.html',datos=data)
+    print(cantidades)
+    return render_template('estadosDeCuenta.html',datos=data,cant=cantidades)
 
 #ruta para crear una Cuenta Objetivo
 @app.route('/moverAVerDetallesdeEstadodeCuenta/<id>')
 def moverAVerDetallesdeEstadodeCuenta(id):
     cursor.execute('exec verMovimientosCAdeEstadoCuenta '+str(id))
     data=cursor.fetchall()
-    print(data)
     return render_template("verDetallesEstadoCuenta.html",data=data)
 
 
