@@ -12,7 +12,6 @@
     <h1>Estados de cuenta más recientes</h1>
     <a href="/volverAlMenu" class="btn btn-primary">Regresar al menu principal</a>
     {% for estados in datos %}
-    <p>No se por que el puto interes(el primero) es None -.- {{cant}}</p>
     <section class="contenedor flex">
         {%for estado in estados%}
             <div class="bloque">
@@ -29,9 +28,12 @@
                 <p>Saldo</p>
                 <p>Anterior {{estado.2}}</p>
                 <p>Nuevo {{estado.3}} </p>
-                <p>Débitos: 0</p>
-                <p>Créditos: 0</p>
-                <p>Intereses: 0</p>
+                <p>Intereses: {{estado.5}}</p>
+                <p>Retiros ATM: {{estado.6}}</p>
+                <p>Retiros Ventana: {{estado.7}}</p>
+                <p>Deposito ATM: {{estado.8}}</p>
+                <p>Deposito Ventana: {{estado.9}}</p>
+
                 <hr>
                 <form action="/moverAVerDetallesdeEstadodeCuenta/{{estado.4}}"><button type="submit" class="btn btn-primary btn-block btn-large">Ver detalles</button></form>
                 

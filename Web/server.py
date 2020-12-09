@@ -208,9 +208,7 @@ def estadosDeCuenta():
     data=cursor.fetchall()
     cantidades=[]
     separador=[]
-    print( "estados consultados", data)
     for index,i in enumerate(data):
-        
         for indexx,j in enumerate(i):
             if (j == None):
                 data[index][indexx] = "----"
@@ -218,13 +216,20 @@ def estadosDeCuenta():
                 cursor.execute('exec ConsultarCantidadMovimientosEstado '+str(j)+","+str(cuenta))
                 cant=cursor.fetchall()
                 cantidades.append(cant[0])
+    print(cantidades)
+    aux=[]
+    for i in range(len(data)):
+        aux.append([])
+        for j in data[i]:
+            aux[i].append(j)
+        aux[i].extend(cantidades[i])
+    data=aux
     if (len(data)>4):
         separador.append(data[:4])
         separador.append(data[4:])
         data=separador
     else:
         data=[data]
-    print(cantidades)
     return render_template('estadosDeCuenta.html',datos=data,cant=cantidades)
 
 #ruta para crear una Cuenta Objetivo

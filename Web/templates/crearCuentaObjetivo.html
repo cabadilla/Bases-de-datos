@@ -10,8 +10,8 @@
         <form action="/crearCuentaObjetivoo" method="post">
             <input type="text" name="descripcion" placeholder="Descripcion" required="required" />
             <input type="number" name="cuota" placeholder="Cuota" required="required" />
-            <p>Dia del mes para rebajo: <input type="number" name="diaRebajo" placeholder="Dia de rebajo" required="required" /></p>
-            <p>Fecha final: <input type="date" name="fechaFinal" placeholder="Fecha final" max="31" min="1" required="required" /></p>
+            <p>Dia del mes para rebajo: <input type="number" name="diaRebajo" placeholder="Dia de rebajo" min= 1 max=31 required="required" /></p>
+            <p>Fecha final: <input type="date" name="fechaFinal" placeholder="Fecha final" value="2021-03-09" min="2021-03-09"  required="required" /></p>
             <button class="btn btn-primary">Crear</button>
         </form>
     </div>
