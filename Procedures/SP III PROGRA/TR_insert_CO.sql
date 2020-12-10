@@ -1,19 +1,13 @@
 
-CREATE TRIGGER [dbo].[TR_insert_CO]
+ALTER TRIGGER [dbo].[TR_insert_CO]
    ON  [dbo].[CuentaObjetivo]
    AFTER INSERT
 AS 
 BEGIN
 	
-	-- SET NOCOUNT ON added to prevent extra result sets from
-	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
-	 
-	
-
-	SELECT I.IdCuentaAhorro,I.Objetivo,I.Cuota,I.DiasRebajo,I.FechaInicio,I.FechaFin,I.isActivo
-	FROM inserted I
-	FOR XML AUTO
+	 DECLARE @x xml
+	 SET @x='';
 	
 	DECLARE @Existingdate datetime
 	SET @Existingdate=GETDATE()
@@ -27,15 +21,14 @@ BEGIN
 				[Fecha],
 				[XMLAntes],
 				[XMLDespues])
-	VALUES (@IdTipoEvento,
-			@IdUser,
-			(SELECT client_net_address FROM sys.dm_exec_connections WHERE session_id = @@SPID),
+	VALUES  (4,
+			(SELECT U.Id FROM dbo.Usuario U WHERE U.inSesion=1),
+			(SELECT ABS(CHECKSUM(NEWID()))),
 			@Existingdate,
-			NULL,
-			(SELECT I.IdCuentaAhorro,I.Objetivo,I.Cuota,I.DiasRebajo,I.FechaInicio,I.FechaFin,I.isActivo
-			FROM inserted I
+			@x,
+			(SELECT CO.IdCuentaAhorro,CO.Cuota,CO.DiasRebajo,CO.FechaInicio,CO.FechaFin,CO.isActivo,CO.Objetivo
+			FROM inserted CO
 			FOR XML AUTO))
 	
-
 END
 GO
