@@ -2,20 +2,19 @@ from flask import Flask,render_template,url_for,request,redirect,flash,session
 from flask_sqlalchemy import SQLAlchemy
 import pyodbc
 
-#creacion de la coneccion con la base de datos
-direccion_servidor = 'tcp:serverproyecto.database.windows.net,1433'
-nombre_bd = 'ProyectoBasesI'
-nombre_usuario = 'allisoncarlos'
-password ='ac-12345'
+import pyodbc
+direccion_servidor = 'tcp:base-pruebas1.database.windows.net,1433'
+nombre_bd = 'Bases de datos'
+nombre_usuario = 'cabadilla'
+password = 'Cato18200'
 try:
-    conexion = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + direccion_servidor+';DATABASE='+nombre_bd+';UID='+nombre_usuario+';PWD=' + password)
-    # OK! conexión exitosa
     conexion = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER=' +
                               direccion_servidor+';DATABASE='+nombre_bd+';UID='+nombre_usuario+';PWD=' + password)
-    #OK! conexión exitosa
+    # OK! conexión exitosa
 except Exception as e:
-    #Atrapar error
+    # Atrapar error
     print("Ocurrió un error al conectar a SQL Server: ", e)
+
 #objeto que se va a utilizar para llamar a procedimientos de la base de datos 
 cursor=conexion.cursor()
 
@@ -44,7 +43,6 @@ def entrar():
     contrasena = request.form['p']
     cursor.execute("exec verUsuario "+"'"+contrasena+"'"+","+"'"+nombre+"'")
     data=cursor.fetchall()
-    print(data)
     if data==[]:
         flash('Digite un usuario o contrasena validos')
         return redirect('/')
