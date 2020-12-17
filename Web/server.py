@@ -51,9 +51,12 @@ def entrar():
         session['contrasena']=data[0][1]
         session['admin']=data[0][2]
 
-    cursor.execute("exec verUsuarioVer "+session['usuario'])
-    data=cursor.fetchall()
-    return render_template('cuentas.html',datos=data)
+    if(session['admin']==0):
+        cursor.execute("exec verUsuarioVer "+session['usuario'])
+        data=cursor.fetchall()
+        return render_template('cuentas.html',datos=data)
+    else:
+        return render_template('administrador.html')
 
 #ruta de regreso para volver a elegir una cuenta
 @app.route('/volverCuentas')
