@@ -51,6 +51,7 @@ def entrar():
         session['contrasena']=data[0][1]
         session['admin']=data[0][2]
     cursor.execute("exec activarUsuario "+"'"+session['contrasena']+"'"+","+"'"+session['usuario']+"'")
+    cursor.commit()
     if(session['admin']==0):
         cursor.execute("exec verUsuarioVer "+session['contrasena'])
         data=cursor.fetchall()
