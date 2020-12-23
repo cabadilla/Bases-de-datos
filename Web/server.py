@@ -52,7 +52,7 @@ def entrar():
         session['admin']=data[0][2]
 
     if(session['admin']==0):
-        cursor.execute("exec verUsuarioVer "+session['usuario'])
+        cursor.execute("exec verUsuarioVer "+session['contrasena'])
         data=cursor.fetchall()
         return render_template('cuentas.html',datos=data)
     else:
@@ -300,6 +300,52 @@ def modificarCO(descrip):
     cursor.execute("exec modificarCuentaObjetivo "+descripcionN+","+descripcionV+","+numeroDeCuenta)
     cursor.commit()
     return redirect(url_for('cuentasObjetivo'))
+#-----------------------------------------------------------------------RUTAS PARA ADMINISTRADOR
+
+#ruta para volver al menu de administracion
+@app.route('/volverAlMenuAdmi')
+def admiVolverAlMenu():
+    return redirect('/admiMain')
+
+#ruta del menu principal
+@app.route('/admiMain')
+def admiMain():
+    return render_template('administrador.html')
+
+#ruta para consultar los beneficiarios
+@app.route('/admiBeneficiario')
+def admiBeneficiario():
+    cursor.execute("exec ConsultaBeneficiariosAdministrador")
+    data=cursor.fetchall()
+    cursor.commit()
+    return render_template('admiBeneficiario.html',datos=data)
+
+
+#ruta para consultar las cuentas objetivo sin retiros
+@app.route('/admiCuentaObjetivo')
+def admiCuentaObjetivo():
+    cursor.execute("exec consultaCuentasObjetivo")
+    data=cursor.fetchall()
+    cursor.commit()
+    print(data)
+    return render_template('admiCuentasObjetivo.html',datos=data)
+
+#ruta para consultar las cuentas objetivo sin retiros
+@app.route('/admiCuentaAhorroMultas')
+def admiCuentasAhorroMultas():
+    data=(())
+    return render_template('admiCuentasAhorroMultadas.html',datos=data)
+
+
+#ruta para buscarL las cuentas en ese rango de dias
+
+@app.route('/admibuscarCuentas',methods=['POST'])
+def admiBuscarCuentas():
+    cantidadDias=request.form['dias']
+    cursor.execute("exec ConsultaCuentasMultadas "+str(cantidadDias))
+    detalle=cursor.fetchall()
+    print(detalle)
+    return render_template('admiCuentasAhorroMultadas.html',datos=detalle)
 
 
 app.run(port=3000, debug=True)

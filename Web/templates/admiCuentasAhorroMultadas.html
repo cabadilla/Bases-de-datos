@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<div>
+    <form action="/admibuscarCuentas" method="POST">
+    <input type="number" name="dias" required="required" />
+    <button class="btn btn-primary">Buscar cuentas</button>
+</form>
+</div>
+
+ <div >
+    <h1>Cuentas ahorro con multas por exceso de retiros</h1>
+    <a href="/volverAlMenuAdmi" class="btn btn-primary">Regresar al menu principal</a>
+    
+    
+    
+        <div class="tablaBene">
+            
+            <table>
+                <thead>
+                    <tr>
+                    <td>Cuentas</td>
+                    <td>Promedio de retiros por mes</td>
+                    <td>Fecha con mas retiros</td>
+                </thead>
+                <tbody>
+                    {%for cuentas in datos%}
+                        <tr>
+                            <td>{{cuentas.0}}</td>
+                            <td>{{cuentas.1}}</td>
+                            <td>{{cuentas.2}}</td>
+                        </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+   
+    
+        
+ </div>
+
+
+
+{% endblock %}

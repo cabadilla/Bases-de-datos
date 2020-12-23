@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="bene">
+    <h1>Cuentas Objetivo sin retiro</h1>
+    <div class="tablaAdmiCO">
+        
+        <table>
+            <thead>
+                <tr>
+                <td>Número de cuenta que pertenece</td>
+                <td>Id de la cuenta objetivo</td>
+                <td>Descripción</td>
+                <td>Cantidad de depósitos realizados</td>
+                <td>Depósitos si todos fueran correctos</td>
+
+                <td>Monto total debitado real</td>
+                <td>Monto total debitado si todos fueran correctos</td>
+
+
+                </tr>
+            </thead>
+            <tbody>
+                {%for bene in datos%}
+                    <tr>
+                        <td>{{bene.0}}</td>
+                        <td>{{bene.1}}</td>
+                        <td>{{bene.2}}</td>
+                        <td>{{bene.3}}</td>
+                        <td>{{bene.4}}</td>
+                        <td>{{bene.5}}</td>
+                        <td>{{bene.6}}</td>
+                        <td>{{bene.7}}</td>
+                    </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
+
+<a href="/volverAlMenuAdmi" class="btn btn-primary">Regresar al menu principal</a>
+
+</div>
+{% endblock %}

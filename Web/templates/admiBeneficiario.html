@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="bene">
+    <h1>Personas beneficiadas</h1>
+    <div class="tablaBene">
+        
+        <table>
+            <thead>
+                <tr>
+                <td>Beneficiario</td>
+                <td>Cuenta mayor beneficiadora</td>
+                <td>Cantidad de cuentas</td>
+                <td>Monto total de beneficio</td>
+                </tr>
+            </thead>
+            <tbody>
+                {%for bene in datos%}
+                    <tr>
+                        <td>{{bene.0}}</td>
+                        <td>{{bene.1}}</td>
+                        <td>{{bene.2}}</td>
+                        <td>{{bene.3}}</td>
+                    </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
+
+<a href="/volverAlMenuAdmi" class="btn btn-primary">Regresar al menu principal</a>
+
+</div>
+{% endblock %}

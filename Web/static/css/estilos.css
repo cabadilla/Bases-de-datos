@@ -85,7 +85,15 @@ body {
 	height:1000px;
 
 }
+.tablaAdmiCO {
+	position: absolute;
+	top: 40%;
+	left: 30%;
+	margin: -130px 0 0 -130px;
+	width:1500px;
+	height:1000px;
 
+}
 .bene button{
 	font-size:10px;
     border:50px;
